@@ -67,49 +67,92 @@
       -----------------------------ставим бабел https://babeljs.io/setup#installation
       8 npm install --save-dev babel-loader @babel/core
 
-             9 webpack.config.js в rules: [] вставляем
-             {
-             test: /\.css$/i,
-             use: ["style-loader", "css-loader"],
-             },
-             {
-             test: /\.m?js$/,
-             exclude: /node_modules/,
-             use: ["babel-loader"],
-             },
+                 9 webpack.config.js в rules: [] вставляем
+                 {
+                 test: /\.css$/i,
+                 use: ["style-loader", "css-loader"],
+                 },
+                 {
+                 test: /\.m?js$/,
+                 exclude: /node_modules/,
+                 use: ["babel-loader"],
+                 },
 
-             10 ставим npm install @babel/preset-env --save-dev
-             11 создаем babel.config.json с настройкой
-             {
-             "presets": ["@babel/preset-env"]
-             }
-             ---------------------- ставим sass loader https://webpack.js.org/loaders/sass-loader/
+                 10 ставим npm install @babel/preset-env --save-dev
+                 11 создаем babel.config.json с настройкой
+                 {
+                 "presets": ["@babel/preset-env"]
+                 }
+                 ---------------------- ставим sass loader https://webpack.js.org/loaders/sass-loader/
 
-             12 npm install sass-loader sass -d
-             13 webpack.config.js в rules: [] вставляем
+                 12 npm install sass-loader sass -d
+                 13 webpack.config.js в rules: [] вставляем
 
-             {
-             test: /\.s[ac]ss$/i,
-             use: [
-             // Creates `style` nodes from JS strings
-             "style-loader",
-             // Translates CSS into CommonJS
-             "css-loader",
-             // Compiles Sass to CSS
-             "sass-loader",
-             ],
-             },
+                 {
+                 test: /\.s[ac]ss$/i,
+                 use: [
+                 // Creates `style` nodes from JS strings
+                 "style-loader",
+                 // Translates CSS into CommonJS
+                 "css-loader",
+                 // Compiles Sass to CSS
+                 "sass-loader",
+                 ],
+                 },
 
-      -------------------------------ставим плагин HtmlWebpackPlugin
-      14 npm install --save-dev html-webpack-plugin
-      15 webpack.config.js вверх вставляем
-      const HtmlWebpackPlugin = require('html-webpack-plugin');
+          -------------------------------ставим плагин HtmlWebpackPlugin
+          14 npm install --save-dev html-webpack-plugin
+          15 webpack.config.js вверх вставляем
+          const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-      - module.exports создаем plugins: [] добавляем туда плагин
+          - module.exports создаем plugins: [] добавляем туда плагин
 
-      module.exports = {
-      output...
-      devServer...
-      module...
-      plugins: [new HtmlWebpackPlugin()],
-      };
+          module.exports = {
+          output...
+          devServer...
+          module...
+          plugins: [new HtmlWebpackPlugin()],
+          };
+
+      16 поправил new HtmlWebpackPlugin() на
+      https://github.com/jantimon/html-webpack-plugin
+      -------------------------------------- ставим плагин MiniCssExtractPlugin https://webpack.js.org/plugins/mini-css-extract-plugin/#root вытягивает все в css файл
+      17 npm install --save-dev mini-css-extract-plugin
+
+      18 webpack.config.js вверх вставляем
+
+      const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+      19 добавляем MiniCssExtractPlugin.loader в USE
+
+          {
+
+      test: /\.s[ac]ss$/i,
+      use: [
+      // Creates `style` nodes from JS strings
+      // "style-loader",
+      // Translates CSS into CommonJS
+      MiniCssExtractPlugin.loader,
+      // Translates CSS into ComonCss file
+      "css-loader",
+      // Compiles Sass to CSS
+      "sass-loader",
+      ],
+      },
+
+    20 инициализация плагина в plugins []
+
+    plugins: [
+
+    new MiniCssExtractPlugin({ filename: "styles.css" }),
+    ],
+
+  --------------------- ставим плагин Clean plugin for webpack https://www.npmjs.com/package/clean-webpack-plugin // чистит папочку билд
+
+21 npm install --save-dev clean-webpack-plugin
+22 webpack.config.js вверх вставляем
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+22 инициализация плагина в plugins []
+plugins: [
+new CleanWebpackPlugin(),
+],
