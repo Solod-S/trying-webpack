@@ -1,0 +1,36 @@
+{
+  "name": "trying-webpack",
+  "version": "1.0.0",
+  "description": "1st lunch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "devserver": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Solod-S/trying-webpack.git"
+  },
+  "author": "Solod S.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Solod-S/trying-webpack/issues"
+  },
+  "homepage": "https://github.com/Solod-S/trying-webpack#readme",
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.0"
+  },
+  "dependencies": {
+    "sass": "^1.54.5",
+    "sass-loader": "^13.0.2"
+  }
+}
